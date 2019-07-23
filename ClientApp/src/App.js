@@ -1,20 +1,32 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import React, { Component } from "react";
+import { Route } from "react-router";
+import { Layout } from "./components/Layout";
+import Login from "./components/Pages/Login/Login";
+import Test from "./components/Pages/Test/Test";
+import UserGroup from "./components/Pages/UserGroup/UserGroup";
 
 export default class App extends Component {
   static displayName = App.name;
+  state = { loggedIn: true };
+  render() {
+    if (this.state.loggedIn) {
+      return (
+        <Layout>
+          <Route exact path="/userGroup" component={UserGroup} />
+          <Route path="/test" component={Test} />
 
-  render () {
-    return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
-      </Layout>
-    );
+        </Layout>
+      );
+    } else {
+      return <Login />;
+    }
+  }
+
+  componentDidMount() {
+    fetch("api/user/login")
+      .then(c => c.json())
+      .then(c => {
+        this.setState({ loggedIn: c });
+      });
   }
 }
