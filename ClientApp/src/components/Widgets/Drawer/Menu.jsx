@@ -58,11 +58,11 @@ class Menu extends Component {
             </ListItemIcon>
             <ListItemText primary="درخواست نقل و انتقال" />
           </ListItem>
-          <ListItem button component={Link} to="/notification">
+          <ListItem button component={Link} to="/state">
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
-            <ListItemText primary="اطلاعیه ها" />
+            <ListItemText primary="استان ها" />
           </ListItem>
         </List>
       </div>

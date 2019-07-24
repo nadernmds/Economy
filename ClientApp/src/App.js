@@ -4,7 +4,9 @@ import { Layout } from "./components/Layout";
 import Login from "./components/Pages/Login/Login";
 import Test from "./components/Pages/Test/Test";
 import UserGroup from "./components/Pages/UserGroup/UserGroup";
-
+import State from "./components/Pages/State/State";
+import User from './components/Pages/User/User'
+import SelectCompany from "./components/Pages/SelectCompany/SelectCompany";
 export default class App extends Component {
   static displayName = App.name;
   state = { loggedIn: true };
@@ -13,7 +15,12 @@ export default class App extends Component {
       return (
         <Layout>
           <Route exact path="/userGroup" component={UserGroup} />
+          <Route exact path="/state" component={State} />
+          <Route exact path="/user" component={User} />
+          <Route exact path="/selectCompany" component={SelectCompany} />
+
           <Route path="/test" component={Test} />
+          <Route path="/login" component={Login} />
 
         </Layout>
       );

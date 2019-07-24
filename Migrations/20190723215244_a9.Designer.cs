@@ -4,14 +4,16 @@ using Economy.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Economy.Migrations
 {
     [DbContext(typeof(Economy_Context))]
-    partial class Economy_ContextModelSnapshot : ModelSnapshot
+    [Migration("20190723215244_a9")]
+    partial class a9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,13 +88,13 @@ namespace Economy.Migrations
 
                     b.Property<int?>("companyID");
 
-                    b.Property<int?>("userId");
+                    b.Property<int?>("userID");
 
                     b.HasKey("companyUserID");
 
                     b.HasIndex("companyID");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("userID");
 
                     b.ToTable("CompanyUser");
                 });
@@ -107,11 +109,11 @@ namespace Economy.Migrations
 
                     b.Property<string>("post");
 
-                    b.Property<int?>("userId");
+                    b.Property<int?>("userID");
 
                     b.HasKey("ownerID");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("userID");
 
                     b.ToTable("Owners");
                 });
@@ -177,7 +179,7 @@ namespace Economy.Migrations
 
             modelBuilder.Entity("Economy.Models.User", b =>
                 {
-                    b.Property<int>("userId")
+                    b.Property<int>("userID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -201,7 +203,7 @@ namespace Economy.Migrations
 
                     b.Property<string>("username");
 
-                    b.HasKey("userId");
+                    b.HasKey("userID");
 
                     b.HasIndex("userGroupId");
 
@@ -251,14 +253,14 @@ namespace Economy.Migrations
 
                     b.HasOne("Economy.Models.User", "User")
                         .WithMany("CompanyUsers")
-                        .HasForeignKey("userId");
+                        .HasForeignKey("userID");
                 });
 
             modelBuilder.Entity("Economy.Models.Owner", b =>
                 {
                     b.HasOne("Economy.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("userId");
+                        .HasForeignKey("userID");
                 });
 
             modelBuilder.Entity("Economy.Models.Project", b =>

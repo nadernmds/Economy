@@ -19,7 +19,7 @@ namespace Economy.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies(true).UseSqlServer("Data Source=.;Initial Catalog=Economy;Persist Security Info=True;User ID=sa;Password=rzk123");
+            optionsBuilder.UseLazyLoadingProxies(true).UseSqlServer("Data Source=.;Initial Catalog=Economy;Persist Security Info=True;User ID=sa;Password=1371");
             base.OnConfiguring(optionsBuilder);
         }
     }

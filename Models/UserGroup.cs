@@ -7,6 +7,10 @@ namespace Economy.Models
 {
     public class UserGroup
     {
+        public UserGroup()
+        {
+            Users = new HashSet<User>();
+        }
         public int userGroupId { get; set; }
         public string groupName { get; set; }
 

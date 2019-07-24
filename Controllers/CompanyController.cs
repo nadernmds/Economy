@@ -20,7 +20,7 @@ namespace Economy.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
         {
-            return await db.Companies.ToListAsync();
+            return await db.Companies.Include(c=> c.ActivityType).ToListAsync();
         }
 
         // GET: api/Company/5

@@ -9,6 +9,6 @@ namespace Economy.Models
     {
         public int bringerID { get; set; }
         public User User { get; set; }
-
+    
     }
 }

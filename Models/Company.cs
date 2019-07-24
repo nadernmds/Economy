@@ -11,6 +11,7 @@ namespace Economy.Models
         [Key]
         public int companyID { get; set; }
         public string companyName { get; set; }
+        public string startDate { get; set; }
         public virtual ICollection<CompanyUser> CompanyUsers { get; set; }
         public virtual ActivityType ActivityType { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
