@@ -4,14 +4,16 @@ using Economy.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Economy.Migrations
 {
     [DbContext(typeof(Economy_Context))]
-    partial class Economy_ContextModelSnapshot : ModelSnapshot
+    [Migration("20190730212621_a14")]
+    partial class a14
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,8 +85,6 @@ namespace Economy.Migrations
                     b.Property<string>("companyName");
 
                     b.Property<string>("nationalCode");
-
-                    b.Property<int?>("personnelCount");
 
                     b.Property<string>("startDate");
 
@@ -180,8 +180,6 @@ namespace Economy.Migrations
 
                     b.Property<int?>("companyID");
 
-                    b.Property<string>("education");
-
                     b.Property<string>("mobile");
 
                     b.Property<string>("name");
@@ -191,8 +189,6 @@ namespace Economy.Migrations
                     b.Property<string>("phone");
 
                     b.Property<string>("post");
-
-                    b.Property<string>("skills");
 
                     b.HasKey("realPersonID");
 

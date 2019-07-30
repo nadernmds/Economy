@@ -4,14 +4,16 @@ using Economy.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Economy.Migrations
 {
     [DbContext(typeof(Economy_Context))]
-    partial class Economy_ContextModelSnapshot : ModelSnapshot
+    [Migration("20190730194747_a12")]
+    partial class a12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,38 +40,17 @@ namespace Economy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("assetTypeID");
-
                     b.Property<int?>("companyID");
 
-                    b.Property<decimal?>("emount");
-
-                    b.Property<int?>("realPersonID");
+                    b.Property<decimal>("emount");
 
                     b.Property<string>("title");
 
                     b.HasKey("AssetID");
 
-                    b.HasIndex("assetTypeID");
-
                     b.HasIndex("companyID");
 
-                    b.HasIndex("realPersonID");
-
                     b.ToTable("Assets");
-                });
-
-            modelBuilder.Entity("Economy.Models.AssetType", b =>
-                {
-                    b.Property<int>("assetTypeID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("assetType");
-
-                    b.HasKey("assetTypeID");
-
-                    b.ToTable("AssetType");
                 });
 
             modelBuilder.Entity("Economy.Models.Company", b =>
@@ -81,10 +62,6 @@ namespace Economy.Migrations
                     b.Property<int?>("ActivityTypeactivtyTypeID");
 
                     b.Property<string>("companyName");
-
-                    b.Property<string>("nationalCode");
-
-                    b.Property<int?>("personnelCount");
 
                     b.Property<string>("startDate");
 
@@ -105,15 +82,15 @@ namespace Economy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("companyID");
+                    b.Property<int?>("companyID");
 
-                    b.Property<int>("userID");
+                    b.Property<int?>("userId");
 
                     b.HasKey("companyUserID");
 
                     b.HasIndex("companyID");
 
-                    b.HasIndex("userID");
+                    b.HasIndex("userId");
 
                     b.ToTable("CompanyUser");
                 });
@@ -140,8 +117,6 @@ namespace Economy.Migrations
 
                     b.Property<int?>("projectTypeID");
 
-                    b.Property<int?>("realPersonID");
-
                     b.Property<string>("title");
 
                     b.HasKey("projectID");
@@ -149,8 +124,6 @@ namespace Economy.Migrations
                     b.HasIndex("companyID");
 
                     b.HasIndex("projectTypeID");
-
-                    b.HasIndex("realPersonID");
 
                     b.ToTable("Projects");
                 });
@@ -166,41 +139,6 @@ namespace Economy.Migrations
                     b.HasKey("projectTypeID");
 
                     b.ToTable("ProjectType");
-                });
-
-            modelBuilder.Entity("Economy.Models.RealPerson", b =>
-                {
-                    b.Property<int>("realPersonID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ActivityTypeactivtyTypeID");
-
-                    b.Property<string>("address");
-
-                    b.Property<int?>("companyID");
-
-                    b.Property<string>("education");
-
-                    b.Property<string>("mobile");
-
-                    b.Property<string>("name");
-
-                    b.Property<string>("nationalCode");
-
-                    b.Property<string>("phone");
-
-                    b.Property<string>("post");
-
-                    b.Property<string>("skills");
-
-                    b.HasKey("realPersonID");
-
-                    b.HasIndex("ActivityTypeactivtyTypeID");
-
-                    b.HasIndex("companyID");
-
-                    b.ToTable("RealPersons");
                 });
 
             modelBuilder.Entity("Economy.Models.State", b =>
@@ -222,9 +160,20 @@ namespace Economy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<string>("address");
+
                     b.Property<string>("email");
 
+                    b.Property<string>("mobile");
+
+                    b.Property<string>("name");
+
                     b.Property<string>("password");
+
+                    b.Property<string>("phone");
 
                     b.Property<int?>("userGroupId");
 
@@ -235,6 +184,8 @@ namespace Economy.Migrations
                     b.HasIndex("userGroupId");
 
                     b.ToTable("Users");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
                 });
 
             modelBuilder.Entity("Economy.Models.UserGroup", b =>
@@ -250,19 +201,22 @@ namespace Economy.Migrations
                     b.ToTable("UserGroups");
                 });
 
+            modelBuilder.Entity("Economy.Models.RealPerson", b =>
+                {
+                    b.HasBaseType("Economy.Models.User");
+
+                    b.Property<string>("post");
+
+                    b.Property<int>("realPersonID");
+
+                    b.HasDiscriminator().HasValue("RealPerson");
+                });
+
             modelBuilder.Entity("Economy.Models.Asset", b =>
                 {
-                    b.HasOne("Economy.Models.AssetType", "AssetType")
-                        .WithMany("Assets")
-                        .HasForeignKey("assetTypeID");
-
                     b.HasOne("Economy.Models.Company", "Company")
                         .WithMany("Assets")
                         .HasForeignKey("companyID");
-
-                    b.HasOne("Economy.Models.RealPerson", "RealPerson")
-                        .WithMany("Assets")
-                        .HasForeignKey("realPersonID");
                 });
 
             modelBuilder.Entity("Economy.Models.Company", b =>
@@ -280,13 +234,11 @@ namespace Economy.Migrations
                 {
                     b.HasOne("Economy.Models.Company", "Company")
                         .WithMany("CompanyUsers")
-                        .HasForeignKey("companyID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("companyID");
 
                     b.HasOne("Economy.Models.User", "User")
                         .WithMany("CompanyUsers")
-                        .HasForeignKey("userID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("userId");
                 });
 
             modelBuilder.Entity("Economy.Models.Project", b =>
@@ -298,21 +250,6 @@ namespace Economy.Migrations
                     b.HasOne("Economy.Models.ProjectType", "projectType")
                         .WithMany("Projects")
                         .HasForeignKey("projectTypeID");
-
-                    b.HasOne("Economy.Models.RealPerson")
-                        .WithMany("Projects")
-                        .HasForeignKey("realPersonID");
-                });
-
-            modelBuilder.Entity("Economy.Models.RealPerson", b =>
-                {
-                    b.HasOne("Economy.Models.ActivityType", "ActivityType")
-                        .WithMany()
-                        .HasForeignKey("ActivityTypeactivtyTypeID");
-
-                    b.HasOne("Economy.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("companyID");
                 });
 
             modelBuilder.Entity("Economy.Models.User", b =>

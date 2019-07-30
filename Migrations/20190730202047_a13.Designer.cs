@@ -4,14 +4,16 @@ using Economy.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Economy.Migrations
 {
     [DbContext(typeof(Economy_Context))]
-    partial class Economy_ContextModelSnapshot : ModelSnapshot
+    [Migration("20190730202047_a13")]
+    partial class a13
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,13 +40,13 @@ namespace Economy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("assetTypeID");
+                    b.Property<int>("assetTypeID");
 
-                    b.Property<int?>("companyID");
+                    b.Property<int>("companyID");
 
-                    b.Property<decimal?>("emount");
+                    b.Property<decimal>("emount");
 
-                    b.Property<int?>("realPersonID");
+                    b.Property<int>("realPersonID");
 
                     b.Property<string>("title");
 
@@ -83,8 +85,6 @@ namespace Economy.Migrations
                     b.Property<string>("companyName");
 
                     b.Property<string>("nationalCode");
-
-                    b.Property<int?>("personnelCount");
 
                     b.Property<string>("startDate");
 
@@ -180,8 +180,6 @@ namespace Economy.Migrations
 
                     b.Property<int?>("companyID");
 
-                    b.Property<string>("education");
-
                     b.Property<string>("mobile");
 
                     b.Property<string>("name");
@@ -191,8 +189,6 @@ namespace Economy.Migrations
                     b.Property<string>("phone");
 
                     b.Property<string>("post");
-
-                    b.Property<string>("skills");
 
                     b.HasKey("realPersonID");
 
@@ -254,15 +250,18 @@ namespace Economy.Migrations
                 {
                     b.HasOne("Economy.Models.AssetType", "AssetType")
                         .WithMany("Assets")
-                        .HasForeignKey("assetTypeID");
+                        .HasForeignKey("assetTypeID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Economy.Models.Company", "Company")
                         .WithMany("Assets")
-                        .HasForeignKey("companyID");
+                        .HasForeignKey("companyID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Economy.Models.RealPerson", "RealPerson")
                         .WithMany("Assets")
-                        .HasForeignKey("realPersonID");
+                        .HasForeignKey("realPersonID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Economy.Models.Company", b =>

@@ -11,7 +11,7 @@ namespace Economy.Models
         public DbSet<Company> Companies { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }
-        public DbSet<Owner> Owners { get; set; }
+        public DbSet<RealPerson> RealPersons { get; set; }
         public DbSet<Asset> Assets { get; set; }
         public DbSet<ActivityType> ActivityTypes { get; set; }
         public DbSet<State> States { get; set; }

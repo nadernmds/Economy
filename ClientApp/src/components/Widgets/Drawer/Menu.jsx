@@ -27,36 +27,18 @@ class Menu extends Component {
             </ListItemIcon>
             <ListItemText primary="گروه کاربری" />
           </ListItem>
-          <ListItem button component={Link} to="/bank">
+          <ListItem button component={Link} to="/realperson">
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
-            <ListItemText primary="بانک ها" />
+            <ListItemText primary="اشخاص حقیقی" />
           </ListItem>
           <Divider />
-          <ListItem button component={Link} to="/faq">
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="سوالات متداول" />
-          </ListItem>
-          <ListItem button component={Link} to="/stock">
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="تعریف سهام" />
-          </ListItem>
           <ListItem button component={Link} to="/company">
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
-            <ListItemText primary="شرکت ها" />
-          </ListItem>
-          <ListItem button component={Link} to="/transfer">
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="درخواست نقل و انتقال" />
+            <ListItemText primary=" اشخاص حقوقی" />
           </ListItem>
           <ListItem button component={Link} to="/state">
             <ListItemIcon>

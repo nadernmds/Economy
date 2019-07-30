@@ -29,6 +29,7 @@ class Table extends Component {
                     </Box>
                   </Grid>
                 ))}
+                {this.props.children}
               </Grid>
               <Button
                 style={{ marginTop: 10 }}
