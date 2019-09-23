@@ -10,8 +10,9 @@ export class Layout extends Component {
     return (
       <div>
         <NavBar />
+        
         <div className="uk-grid-small" data-uk-drid>
-            <MyDrawer title='نرم افزار مدیریت اطلاعات اقتصادی آستان قدس رضوی'>
+            <MyDrawer title='  مدیریت  اطلاعات اقتصادی گروه مشاوران دفتر آستان قدس در آذربایجان شرقی'>
               {this.props.children}
             </MyDrawer>
         </div>

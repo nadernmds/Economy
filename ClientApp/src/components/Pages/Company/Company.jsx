@@ -11,8 +11,11 @@ class Comapny extends Component {
   columns = [{ title: "نام شرکت", field: "companyName" },
   { title: "کد شناسه ملی", field: "nationalCode" },
   { title: "زمینه فعالیت ", field: "activityTypeed" },
+  { title: "تعداد پرسنل  ", field: "personnelCount" },
+  { title: "معرف", field: "representor" },
+  { title: " محل شرکت  ", field: "address" },
 
-  { title: "تاریخ شروع مشارکت", field: "startDate" }];
+  { title: " تاریخ مراجعه  ", field: "startDate" }];
   render() {
     return (
       <div>
@@ -33,7 +36,9 @@ class Comapny extends Component {
           title="شرکت ها"
           primaryKey="companyID"
           columns={this.columns}
-        />
+        >
+          
+        </Table>
       </div>
     );
   }

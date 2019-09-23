@@ -13,6 +13,7 @@ class RealPerson extends Component {
     { title: "شماره های تماس", field: "phone" },
     { title: "موبایل", field: "mobile" },
     { title: "آدرس", field: "address" },
+    { title: "معرف", field: "representor" },
     { title: "تحصیلات", field: "education" },
     { title: "مهارت ها", field: "skills" }
   ];
